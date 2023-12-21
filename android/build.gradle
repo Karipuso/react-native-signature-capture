@@ -50,6 +50,9 @@ android {
         tasks.named("generateDebugRFile").configure {
             dependsOn(":reactnativesignaturecapture:processDebugManifest")
         }
+        tasks.named("compileDebugJavaWithJavac").configure {
+            dependsOn(":reactnativesignaturecapture:generateDebugRFile")
+        }
     }
 }
 
