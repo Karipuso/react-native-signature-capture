@@ -17,6 +17,40 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+
+    // Attach explicit dependency configuration
+    afterEvaluate {
+        tasks.named("packageDebugResources").configure {
+            dependsOn ":react-native-signature-capture:generateDebugResValues"
+        }
+        tasks.named("extractDeepLinksDebug").configure {
+            dependsOn ":react-native-signature-capture:generateDebugResValues"
+        }
+        tasks.named("extractDeepLinksDebug").configure {
+            dependsOn ":reactnativesignaturecapture:generateDebugResValues"
+        }
+        tasks.named("compileDebugLibraryResources").configure {
+            dependsOn(":react-native-signature-capture:packageDebugResources")
+        }
+        tasks.named("compileDebugLibraryResources").configure {
+            dependsOn(":reactnativesignaturecapture:packageDebugResources")
+        }
+        tasks.named("parseDebugLocalResources").configure {
+            dependsOn(":react-native-signature-capture:packageDebugResources")
+        }
+        tasks.named("parseDebugLocalResources").configure {
+            dependsOn(":reactnativesignaturecapture:packageDebugResources")
+        }
+        tasks.named("generateDebugRFile").configure {
+            dependsOn(":react-native-signature-capture:parseDebugLocalResources")
+        }
+        tasks.named("generateDebugRFile").configure {
+            dependsOn(":react-native-signature-capture:processDebugManifest")
+        }
+        tasks.named("generateDebugRFile").configure {
+            dependsOn(":reactnativesignaturecapture:processDebugManifest")
+        }
+    }
 }
 
 dependencies {
