@@ -54,7 +54,25 @@ android {
             dependsOn(":reactnativesignaturecapture:generateDebugRFile")
         }
         tasks.named("compileDebugJavaWithJavac").configure {
+            dependsOn(":react-native-signature-capture:generateDebugRFile")
+        }
+        tasks.named("compileDebugJavaWithJavac").configure {
             dependsOn(":react-native-signature-capture:generateDebugBuildConfig")
+        }
+        tasks.named("compileDebugJavaWithJavac").configure {
+            dependsOn(":react-native-signature-capture:javaPreCompileDebug")
+        }
+        tasks.named("bundleLibCompileToJarDebug").configure {
+            dependsOn(":react-native-signature-capture:compileDebugJavaWithJavac")
+        }
+        tasks.named("packageDebugAssets").configure {
+            dependsOn(":react-native-signature-capture:compileDebugShaders")
+        }
+        tasks.named("bundleLibRuntimeToJarDebug").configure {
+            dependsOn(":react-native-signature-capture:compileDebugJavaWithJavac")
+        }
+        tasks.named("bundleLibRuntimeToJarDebug").configure {
+            dependsOn(":reactnativesignaturecapture:compileDebugJavaWithJavac")
         }
     }
 }
